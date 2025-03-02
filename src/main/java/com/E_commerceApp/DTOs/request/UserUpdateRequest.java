@@ -11,8 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreationRequest {
-    private String username;
+public class UserUpdateRequest {
     private String password;
     private String fullName;
     private LocalDate birthday;

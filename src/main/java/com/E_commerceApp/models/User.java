@@ -1,14 +1,15 @@
 package com.E_commerceApp.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Getter
+@Data
 @Entity
 public class User {
     @Id
@@ -18,6 +19,7 @@ public class User {
     private String username;
     private String password;
     private String fullName;
+    private LocalDate birthday;
     private String email;
     private String phone;
     private String address;
