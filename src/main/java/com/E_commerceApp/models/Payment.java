@@ -10,4 +10,8 @@ public class Payment {
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
+
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }
