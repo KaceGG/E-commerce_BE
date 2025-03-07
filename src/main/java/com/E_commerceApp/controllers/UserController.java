@@ -4,6 +4,7 @@ import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,12 +30,12 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody UserCreationRequest request) {
+    public User create(@RequestBody @Valid UserCreationRequest request) {
         return userService.createUser(request);
     }
 
     @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable String userId,@RequestBody UserUpdateRequest request) {
+    public User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return userService.updateUser(userId, request);
     }
 

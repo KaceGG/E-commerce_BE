@@ -2,6 +2,8 @@ package com.E_commerceApp.services.impl;
 
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
+import com.E_commerceApp.exception.AppException;
+import com.E_commerceApp.exception.ErrorCode;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.repositories.UserRepository;
 import com.E_commerceApp.services.UserService;
@@ -19,8 +21,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String userId) {
-        return  userRepository.findById(userId).orElseThrow(()
-                -> new RuntimeException("User not found"));
+        return userRepository.findById(userId).orElseThrow(()
+                -> new AppException(ErrorCode.USER_NOT_FOUND));
     }
 
     @Override
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
     public User createUser(UserCreationRequest request) {
         User user = new User();
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new AppException(ErrorCode.USER_EXISTED);
         }
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
@@ -47,8 +49,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(String userId, UserUpdateRequest request) {
-        User  user = userRepository.findById(userId).orElseThrow(()
-                -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(()
+                -> new AppException(ErrorCode.USER_NOT_FOUND));
         user.setPassword(request.getPassword());
         user.setFullName(request.getFullName());
         user.setBirthday(request.getBirthday());
@@ -61,6 +63,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String userId) {
-        userRepository.deleteById(userId);
+        User user = userRepository.findById(userId).orElseThrow(()
+                -> new AppException(ErrorCode.USER_NOT_FOUND));
+        userRepository.delete(user);
     }
 }
