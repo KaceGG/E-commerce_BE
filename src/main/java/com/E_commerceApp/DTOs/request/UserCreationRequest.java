@@ -1,5 +1,6 @@
 package com.E_commerceApp.DTOs.request;
 
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,7 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCreationRequest {
+    @Size(min = 3, message = "Username must be at least 3 characters!")
     private String username;
+
+    @Size(min = 8, message = "Password must be at least 8 characters!")
     private String password;
     private String fullName;
     private LocalDate birthday;
