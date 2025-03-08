@@ -3,7 +3,7 @@ package com.E_commerceApp.controllers;
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
-import com.E_commerceApp.models.User;
+import com.E_commerceApp.DTOs.response.UserResponse;
 import com.E_commerceApp.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -21,28 +21,28 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public ApiResponse<List<User>> getUsers() {
-        ApiResponse<List<User>> apiResponse = new ApiResponse<>();
+    public ApiResponse<List<UserResponse>> getUsers() {
+        ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
         apiResponse.setResult(userService.getUsers());
         return apiResponse;
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId) {
+    public UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PostMapping("/create")
-    public ApiResponse<User> create(@RequestBody @Valid UserCreationRequest request) {
-        ApiResponse<User> response = new ApiResponse<>();
+    public ApiResponse<UserResponse> create(@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<UserResponse> response = new ApiResponse<>();
         response.setResult(userService.createUser(request));
         return response;
     }
 
     @PutMapping("/update/{userId}")
-    public ApiResponse<User> updateUser(@PathVariable String userId,
-                                        @RequestBody UserUpdateRequest request) {
-        ApiResponse<User> response = new ApiResponse<>();
+    public ApiResponse<UserResponse> updateUser(@PathVariable String userId,
+                                                @RequestBody UserUpdateRequest request) {
+        ApiResponse<UserResponse> response = new ApiResponse<>();
         response.setResult(userService.updateUser(userId, request));
         return response;
     }
