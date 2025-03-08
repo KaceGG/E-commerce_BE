@@ -2,7 +2,8 @@ package com.E_commerceApp.controllers;
 
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
-import com.E_commerceApp.models.User;
+import com.E_commerceApp.DTOs.response.ApiResponse;
+import com.E_commerceApp.DTOs.response.UserResponse;
 import com.E_commerceApp.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -20,27 +21,37 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ApiResponse<List<UserResponse>> getUsers() {
+        ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUsers());
+        return apiResponse;
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable String userId) {
+    public UserResponse getUser(@PathVariable String userId) {
         return userService.getUser(userId);
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody @Valid UserCreationRequest request) {
-        return userService.createUser(request);
+    public ApiResponse<UserResponse> create(@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<UserResponse> response = new ApiResponse<>();
+        response.setResult(userService.createUser(request));
+        return response;
     }
 
     @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
-        return userService.updateUser(userId, request);
+    public ApiResponse<UserResponse> updateUser(@PathVariable String userId,
+                                                @RequestBody UserUpdateRequest request) {
+        ApiResponse<UserResponse> response = new ApiResponse<>();
+        response.setResult(userService.updateUser(userId, request));
+        return response;
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable String userId) {
+    public ApiResponse<Void> deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
+        ApiResponse<Void> response = new ApiResponse<>();
+        response.setMessage("User deleted successfully!");
+        return response;
     }
 }

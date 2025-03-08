@@ -2,63 +2,57 @@ package com.E_commerceApp.services.impl;
 
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
+import com.E_commerceApp.DTOs.response.UserResponse;
 import com.E_commerceApp.exception.AppException;
 import com.E_commerceApp.exception.ErrorCode;
+import com.E_commerceApp.mappers.UserMapper;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.repositories.UserRepository;
 import com.E_commerceApp.services.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
-    public User getUser(String userId) {
-        return userRepository.findById(userId).orElseThrow(()
-                -> new AppException(ErrorCode.USER_NOT_FOUND));
+    public UserResponse getUser(String userId) {
+        return userMapper.toUserResponse(userRepository.findById(userId).orElseThrow(()
+                -> new AppException(ErrorCode.USER_NOT_FOUND)));
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserResponse> getUsers() {
+        return userRepository.findAll().stream()
+                .map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
     @Override
-    public User createUser(UserCreationRequest request) {
-        User user = new User();
+    public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
-        user.setFullName(request.getFullName());
-        user.setBirthday(request.getBirthday());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setAddress(request.getAddress());
+        User user = userMapper.toUser(request);
         userRepository.save(user);
-        return user;
+        return userMapper.toUserResponse(userRepository.save(user));
     }
 
     @Override
-    public User updateUser(String userId, UserUpdateRequest request) {
+    public UserResponse updateUser(String userId, UserUpdateRequest request) {
         User user = userRepository.findById(userId).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND));
-        user.setPassword(request.getPassword());
-        user.setFullName(request.getFullName());
-        user.setBirthday(request.getBirthday());
-        user.setEmail(request.getEmail());
-        user.setPhone(request.getPhone());
-        user.setAddress(request.getAddress());
+        userMapper.updateUser(user, request);
         userRepository.save(user);
-        return user;
+        return userMapper.toUserResponse(userRepository.save(user));
     }
 
     @Override
