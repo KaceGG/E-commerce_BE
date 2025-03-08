@@ -2,6 +2,7 @@ package com.E_commerceApp.controllers;
 
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
+import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.services.UserService;
 import jakarta.validation.Valid;
@@ -20,8 +21,10 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ApiResponse<List<User>> getUsers() {
+        ApiResponse<List<User>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUsers());
+        return apiResponse;
     }
 
     @GetMapping("/{userId}")
@@ -30,17 +33,25 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User create(@RequestBody @Valid UserCreationRequest request) {
-        return userService.createUser(request);
+    public ApiResponse<User> create(@RequestBody @Valid UserCreationRequest request) {
+        ApiResponse<User> response = new ApiResponse<>();
+        response.setResult(userService.createUser(request));
+        return response;
     }
 
     @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
-        return userService.updateUser(userId, request);
+    public ApiResponse<User> updateUser(@PathVariable String userId,
+                                        @RequestBody UserUpdateRequest request) {
+        ApiResponse<User> response = new ApiResponse<>();
+        response.setResult(userService.updateUser(userId, request));
+        return response;
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable String userId) {
+    public ApiResponse<Void> deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
+        ApiResponse<Void> response = new ApiResponse<>();
+        response.setMessage("User deleted successfully!");
+        return response;
     }
 }
