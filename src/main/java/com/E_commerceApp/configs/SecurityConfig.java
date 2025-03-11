@@ -17,6 +17,7 @@ public class SecurityConfig {
             "/user/update/{userId}",
             "/user/getAll",
             "/user/delete/{userId}",
+            "/auth/login",
     };
 
     @Bean

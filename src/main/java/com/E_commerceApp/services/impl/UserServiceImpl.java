@@ -9,6 +9,8 @@ import com.E_commerceApp.mappers.UserMapper;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.repositories.UserRepository;
 import com.E_commerceApp.services.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,7 +44,8 @@ public class UserServiceImpl implements UserService {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
         User user = userMapper.toUser(request);
-        userRepository.save(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
@@ -51,7 +54,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND));
         userMapper.updateUser(user, request);
-        userRepository.save(user);
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
