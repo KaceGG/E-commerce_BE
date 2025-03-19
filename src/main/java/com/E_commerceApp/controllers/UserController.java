@@ -25,6 +25,9 @@ public class UserController {
         ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
         apiResponse.setResult(userService.getUsers());
         return apiResponse;
+//        return ApiResponse.<List<UserResponse>>builder()
+//                .result(userService.getUsers())
+//                .build();
     }
 
     @GetMapping("/{userId}")
@@ -37,6 +40,9 @@ public class UserController {
         ApiResponse<UserResponse> response = new ApiResponse<>();
         response.setResult(userService.createUser(request));
         return response;
+//        return ApiResponse.<UserResponse>builder()
+//                .result(userService.createUser(request))
+//                .build();
     }
 
     @PutMapping("/update/{userId}")
@@ -45,6 +51,9 @@ public class UserController {
         ApiResponse<UserResponse> response = new ApiResponse<>();
         response.setResult(userService.updateUser(userId, request));
         return response;
+//        return ApiResponse.<UserResponse>builder()
+//                .result(userService.updateUser(userId, request))
+//                .build();
     }
 
     @DeleteMapping("/delete/{userId}")
@@ -53,5 +62,8 @@ public class UserController {
         ApiResponse<Void> response = new ApiResponse<>();
         response.setMessage("User deleted successfully!");
         return response;
+//        return ApiResponse.<Void>builder()
+//                .message("User has been deleted")
+//                .build();
     }
 }
