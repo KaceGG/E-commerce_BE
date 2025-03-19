@@ -11,7 +11,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-    show-sql: false
+    show-sql: true
 
   jwt:
     signerKey: 64887aa4732e292f9bb60c4bf03a255afb6866a49a3718dc65185f19e9c1fc35

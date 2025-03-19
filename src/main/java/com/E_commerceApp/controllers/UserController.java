@@ -6,6 +6,7 @@ import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.DTOs.response.UserResponse;
 import com.E_commerceApp.services.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getAll")
     public ApiResponse<List<UserResponse>> getUsers() {
         ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
