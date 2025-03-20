@@ -17,14 +17,12 @@ import java.util.HashSet;
 
 @Configuration
 public class AppInitConfig {
-    private static final Logger log = LoggerFactory.getLogger(AppInitConfig.class);
-    private final PasswordEncoder passwordEncoder;
-
     @NonFinal
     static final String ADMIN_USER_NAME = "admin";
-
     @NonFinal
     static final String ADMIN_USER_PASSWORD = "admin";
+    private static final Logger log = LoggerFactory.getLogger(AppInitConfig.class);
+    private final PasswordEncoder passwordEncoder;
 
     public AppInitConfig(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;

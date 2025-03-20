@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/getAll")
     public ApiResponse<List<UserResponse>> getUsers() {
         ApiResponse<List<UserResponse>> apiResponse = new ApiResponse<>();
@@ -58,6 +58,7 @@ public class UserController {
 //                .build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @DeleteMapping("/delete/{userId}")
     public ApiResponse<Void> deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
