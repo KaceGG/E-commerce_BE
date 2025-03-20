@@ -23,7 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+//@EnableMethodSecurity
 public class SecurityConfig {
     public final String[] PUBLIC_ENDPOINTS = {
             "/user/create",
@@ -39,8 +39,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
+//                .formLogin(Customizer.withDefaults())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
@@ -48,7 +48,8 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.PUT, PUBLIC_ENDPOINTS).permitAll()
 //                        .requestMatchers(HttpMethod.DELETE, PUBLIC_ENDPOINTS).permitAll()
 //                        .requestMatchers(HttpMethod.GET, PUBLIC_ENDPOINTS).permitAll()
-                                .anyRequest().authenticated()
+//                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 );
         httpSecurity.oauth2ResourceServer(
                 oauth2 -> oauth2.jwt(
