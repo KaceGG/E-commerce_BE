@@ -4,7 +4,6 @@ import com.E_commerceApp.DTOs.request.CategoryCreationRequest;
 import com.E_commerceApp.DTOs.request.CategoryUpdateRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.DTOs.response.CategoryResponse;
-import com.E_commerceApp.repositories.CategoryRepository;
 import com.E_commerceApp.services.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +15,9 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
 
-    public CategoryController(CategoryService categoryService, CategoryRepository categoryRepository) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/getAll")

@@ -15,6 +15,9 @@ public enum ErrorCode {
     UNAUTHENTICATED(1006, "Unauthenticated!", HttpStatus.UNAUTHORIZED),
     CATEGORY_EXISTED(1007, "Category already existed!", HttpStatus.CONFLICT),
     CATEGORY_NOT_FOUND(1008, "Category not found!", HttpStatus.NOT_FOUND),
+    IMAGE_UPLOAD_FAILED(1009, "Image upload failed!", HttpStatus.BAD_REQUEST),
+    PRODUCT_NOT_FOUND(1010, "Product not found!", HttpStatus.NOT_FOUND),
+    PRODUCT_EXISTED(1011, "Product already existed!", HttpStatus.CONFLICT),
     ;
 
     private final int code;
