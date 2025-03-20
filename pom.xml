@@ -97,6 +97,12 @@
             <version>9.37.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.38.0</version> <!-- Kiểm tra version mới nhất trên Maven Repository -->
+        </dependency>
+
     </dependencies>
 
     <build>

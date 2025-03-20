@@ -15,3 +15,8 @@ spring:
 
   jwt:
     signerKey: 64887aa4732e292f9bb60c4bf03a255afb6866a49a3718dc65185f19e9c1fc35
+
+  cloudinary:
+    cloud-name: dxxxhfhkp
+    api-key: 984796728412287
+    api-secret: 1kBRIasCByB2TM8w5zIQqQuhu0Y

@@ -1,8 +1,11 @@
 package com.E_commerceApp.configs;
 
+import com.E_commerceApp.constant.PredefinedCategory;
 import com.E_commerceApp.constant.PredefinedRole;
+import com.E_commerceApp.models.Category;
 import com.E_commerceApp.models.Role;
 import com.E_commerceApp.models.User;
+import com.E_commerceApp.repositories.CategoryRepository;
 import com.E_commerceApp.repositories.RoleRepository;
 import com.E_commerceApp.repositories.UserRepository;
 import lombok.experimental.NonFinal;
@@ -19,9 +22,12 @@ import java.util.HashSet;
 public class AppInitConfig {
     @NonFinal
     static final String ADMIN_USER_NAME = "admin";
+
     @NonFinal
     static final String ADMIN_USER_PASSWORD = "admin";
+
     private static final Logger log = LoggerFactory.getLogger(AppInitConfig.class);
+
     private final PasswordEncoder passwordEncoder;
 
     public AppInitConfig(PasswordEncoder passwordEncoder, UserRepository userRepository) {
@@ -33,7 +39,7 @@ public class AppInitConfig {
 //            prefix = "spring",
 //            value = "datasource.driver-class-name",
 //            havingValue = "com.mysql.cj.jdbc.Driver")
-    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository) {
+    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, CategoryRepository categoryRepository) {
         log.info("Application started!");
         return args -> {
             if (userRepository.findByUsername("admin").isEmpty()) {
@@ -57,6 +63,27 @@ public class AppInitConfig {
                         .build();
 
                 userRepository.save(user);
+            }
+
+            if (categoryRepository.findByName(PredefinedCategory.PHONE_CATEGORY).isEmpty()) {
+                categoryRepository.save(Category.builder()
+                        .name(PredefinedCategory.PHONE_CATEGORY)
+                        .description("Điện thoại")
+                        .build());
+            }
+
+            if (categoryRepository.findByName(PredefinedCategory.LAPTOP_CATEGORY).isEmpty()) {
+                categoryRepository.save(Category.builder()
+                        .name(PredefinedCategory.LAPTOP_CATEGORY)
+                        .description("Laptop")
+                        .build());
+            }
+
+            if (categoryRepository.findByName(PredefinedCategory.TABLET_CATEGORY).isEmpty()) {
+                categoryRepository.save(Category.builder()
+                        .name(PredefinedCategory.TABLET_CATEGORY)
+                        .description("Tablet")
+                        .build());
             }
         };
     }
