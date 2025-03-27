@@ -46,8 +46,11 @@ public class AuthServiceImpl implements AuthService {
 
         return AuthResponse.builder()
                 .token(token)
-                .authenticated(true)
                 .build();
+    }
+
+    @Override
+    public void logout() {
     }
 
     @Override

@@ -24,4 +24,12 @@ public class AuthController {
                 .result(result)
                 .build();
     }
+
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout() {
+        authService.logout();
+        ApiResponse<Void> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage("Logout successfully!");
+        return apiResponse;
+    }
 }
