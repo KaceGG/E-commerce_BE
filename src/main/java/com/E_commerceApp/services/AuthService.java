@@ -7,5 +7,7 @@ import com.E_commerceApp.models.User;
 public interface AuthService {
     AuthResponse authenticate(AuthRequest authRequest);
 
+    void logout();
+
     String generateToken(User user);
 }
