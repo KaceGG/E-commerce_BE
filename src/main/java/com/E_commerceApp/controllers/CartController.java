@@ -22,7 +22,6 @@ public class CartController {
     @GetMapping
     public ApiResponse<CartResponse> getCart(@RequestParam("userId") String userId) {
         ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
-        apiResponse.setCode(1000);
         apiResponse.setMessage("Cart retrieved successfully");
         apiResponse.setResult(cartService.getCart(userId));
         return apiResponse;
@@ -44,7 +43,6 @@ public class CartController {
             @PathVariable("cartItemId") int cartItemId,
             @Valid @RequestBody UpdateCartItemRequest request) {
         ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
-        apiResponse.setCode(1000);
         apiResponse.setMessage("Cart item updated successfully");
         apiResponse.setResult(cartService.updateCartItem(cartItemId, userId, request));
         return apiResponse;
@@ -55,7 +53,6 @@ public class CartController {
             @RequestParam("userId") String userId,
             @PathVariable("cartItemId") int cartItemId) {
         ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
-        apiResponse.setCode(1000);
         apiResponse.setMessage("Cart item removed successfully");
         apiResponse.setResult(cartService.removeItemFromCart(cartItemId, userId));
         return apiResponse;
@@ -65,7 +62,6 @@ public class CartController {
     public ApiResponse<String> clearCart(@RequestParam("userId") String userId) {
         ApiResponse<String> apiResponse = new ApiResponse<>();
         cartService.clearCart(userId);
-        apiResponse.setCode(1000);
         apiResponse.setMessage("Cart cleared successfully");
         apiResponse.setResult("Cart for user ID " + userId + " has been cleared");
         return apiResponse;
