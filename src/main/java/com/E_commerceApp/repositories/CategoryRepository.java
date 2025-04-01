@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
     boolean existsByName(String name);
 
+    boolean existsByNameAndIdNot(String name, int id);
+
     Optional<Category> findByName(String name);
 }

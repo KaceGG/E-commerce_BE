@@ -39,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
                 user.getPassword());
 
         if (!authenticated)
-            throw new AppException(ErrorCode.UNAUTHENTICATED);
+            throw new AppException(ErrorCode.LOGIN_FAILED);
 
 //        var token = generateToken(request.getUsername());
         var token = generateToken(user);
@@ -61,11 +61,12 @@ public class AuthServiceImpl implements AuthService {
                 .toList();
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getUsername())
+                .subject(user.getId())
                 .issueTime(new Date())
                 .expirationTime(new Date(
                         new Date().getTime() + 3600 * 1000
                 ))
+                .claim("username", user.getUsername())
                 .claim("roles", roles)
                 .build();
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());

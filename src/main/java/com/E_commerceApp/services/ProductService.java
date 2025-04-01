@@ -11,6 +11,8 @@ public interface ProductService {
 
     List<ProductResponse> getAllProducts();
 
+    List<ProductResponse> getProductByCategory(int categoryId);
+
     ProductResponse createProduct(ProductCreationRequest request);
 
     ProductResponse updateProduct(int productId, ProductUpdateRequest request);

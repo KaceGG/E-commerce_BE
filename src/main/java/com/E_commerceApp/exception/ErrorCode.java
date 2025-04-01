@@ -20,7 +20,8 @@ public enum ErrorCode {
     PRODUCT_EXISTED(1011, "Product already existed!", HttpStatus.CONFLICT),
     CART_NOT_FOUND(1012, "Cart not found!", HttpStatus.NOT_FOUND),
     CART_ITEM_NOT_FOUND(1013, "Cart item not found!", HttpStatus.NOT_FOUND),
-    INSUFFICIENT_STOCK(1014, "Insufficient stock!", HttpStatus.BAD_REQUEST)
+    INSUFFICIENT_STOCK(1014, "Insufficient stock!", HttpStatus.BAD_REQUEST),
+    LOGIN_FAILED(1015, "Username or password is incorrect", HttpStatus.BAD_REQUEST),
     ;
 
     private final int code;
