@@ -50,6 +50,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductResponse> getProductByCategory(int categoryId) {
+        List<Product> products = productRepository.findByCategoryId(categoryId);
+        return products.stream().map(productMapper::toProductResponse).toList();
+    }
+
+    @Override
     public ProductResponse createProduct(ProductCreationRequest request) {
         if (productRepository.existsByName(request.getName())) {
             throw new AppException(ErrorCode.PRODUCT_EXISTED);
@@ -90,6 +96,10 @@ public class ProductServiceImpl implements ProductService {
     public ProductResponse updateProduct(int productId, ProductUpdateRequest request) {
         Product product = productRepository.findById(productId).orElseThrow(()
                 -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
+
+        boolean existed = productRepository.existsByNameAndIdNot(request.getName(), productId);
+        if (existed) throw new AppException(ErrorCode.PRODUCT_EXISTED);
+
         productMapper.updateProduct(request, product);
 
         // Xử lý upload ảnh nếu có

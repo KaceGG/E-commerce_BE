@@ -48,6 +48,10 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponse updateCategory(int categoryId, CategoryUpdateRequest request) {
         Category category = categoryRepository.findById(categoryId).orElseThrow(()
                 -> new AppException(ErrorCode.CATEGORY_NOT_FOUND));
+
+        boolean existed = categoryRepository.existsByNameAndIdNot(request.getName(), categoryId);
+        if (existed) throw new AppException(ErrorCode.CATEGORY_EXISTED);
+
         categoryMapper.updateCategory(category, request);
         return categoryMapper.toCategoryResponse(categoryRepository.save(category));
     }

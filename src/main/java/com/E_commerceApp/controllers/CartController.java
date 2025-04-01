@@ -33,7 +33,6 @@ public class CartController {
             @RequestParam("userId") String userId,
             @Valid @RequestBody AddToCartRequest request) {
         ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
-        apiResponse.setCode(1000);
         apiResponse.setMessage("Product added to cart successfully");
         apiResponse.setResult(cartService.addItemToCart(userId, request));
         return apiResponse;

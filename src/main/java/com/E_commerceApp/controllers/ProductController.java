@@ -35,6 +35,13 @@ public class ProductController {
         return apiResponse;
     }
 
+    @GetMapping("/category/{categoryId}")
+    public ApiResponse<List<ProductResponse>> getProductsByCategory(@PathVariable int categoryId) {
+        ApiResponse<List<ProductResponse>> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(productService.getProductByCategory(categoryId));
+        return apiResponse;
+    }
+
     @PostMapping(value = "/create", consumes = "multipart/form-data")
     public ApiResponse<ProductResponse> createProduct(@Valid @ModelAttribute ProductCreationRequest request) {
         ApiResponse<ProductResponse> apiResponse = new ApiResponse<>();
