@@ -7,7 +7,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
@@ -20,3 +20,8 @@ spring:
     cloud-name: dxxxhfhkp
     api-key: 984796728412287
     api-secret: 1kBRIasCByB2TM8w5zIQqQuhu0Y
+
+  zalopay:
+    app-id: 554
+    key1: 8NdU5pG5R2spGHGhyO99HN1OhD8IQJBn
+    key2: uUfsWgfLkRLzq6W2uNXTCxrfxs51auny
