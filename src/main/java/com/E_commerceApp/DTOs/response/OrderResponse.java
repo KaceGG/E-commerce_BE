@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderResponse {
     private int id;
     private LocalDateTime orderDate;
-    private float totalAmount;
+    private double totalAmount;
     private String shippingAddress;
     private String userId;
     private List<OrderItemResponse> items;

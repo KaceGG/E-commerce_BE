@@ -14,6 +14,6 @@ import java.util.List;
 public class OrderRequest {
     private String userId;
     private String shippingAddress;
-    private double amount;
+    private int amount;
     private List<OrderItemRequest> items;
 }

@@ -3,7 +3,6 @@ package com.E_commerceApp.services;
 import com.E_commerceApp.DTOs.request.AddToCartRequest;
 import com.E_commerceApp.DTOs.request.UpdateCartItemRequest;
 import com.E_commerceApp.DTOs.response.CartResponse;
-import com.E_commerceApp.models.Cart;
 
 public interface CartService {
     public CartResponse getCart(String userId);

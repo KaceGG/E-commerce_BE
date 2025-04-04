@@ -18,7 +18,7 @@ public class Order {
     private int id;
 
     private LocalDateTime orderDate;
-    private float totalAmount;
+    private double totalAmount;
     private String shippingAddress;
     private OrderStatus status;
 

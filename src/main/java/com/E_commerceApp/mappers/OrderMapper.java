@@ -30,7 +30,6 @@ public interface OrderMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "order", ignore = true) // Sẽ được set trong service
     @Mapping(target = "product", ignore = true)
-        // Sẽ được set trong service
     OrderItem toOrderItem(OrderItemRequest request);
 
     List<OrderItem> toOrderItems(List<OrderItemRequest> requests);
@@ -41,12 +40,19 @@ public interface OrderMapper {
     OrderResponse toOrderResponse(Order order);
 
     @Mapping(source = "product.id", target = "productId")
+    @Mapping(source = "product.name", target = "productName")
+    @Mapping(source = "product.imageUrl", target = "productImageUrl")
     OrderItemResponse toOrderItemResponse(OrderItem orderItem);
 
     List<OrderItemResponse> toOrderItemResponses(List<OrderItem> orderItems);
 
     @Mapping(source = "paymentMethod", target = "paymentMethod",
             qualifiedByName = "mapPaymentMethodToString")
+    @Mapping(source = "amount", target = "amount")
+    @Mapping(source = "status", target = "status")
+    @Mapping(source = "orderToken", target = "orderToken")
+    @Mapping(source = "paymentUrl", target = "paymentUrl")
+    @Mapping(source = "paymentDate", target = "paymentDate")
     PaymentResponse toPaymentResponse(Payment payment);
 
     @Named("mapPaymentMethodToString")

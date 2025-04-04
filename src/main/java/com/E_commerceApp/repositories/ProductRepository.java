@@ -1,6 +1,5 @@
 package com.E_commerceApp.repositories;
 
-import com.E_commerceApp.DTOs.response.ProductResponse;
 import com.E_commerceApp.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
