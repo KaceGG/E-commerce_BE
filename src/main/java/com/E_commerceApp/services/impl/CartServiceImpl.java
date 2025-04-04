@@ -39,11 +39,10 @@ public class CartServiceImpl implements CartService {
     @Transactional
     @Override
     public CartResponse getCart(String userId) {
-        log.info("Fetching cart for user ID: {}", userId);
-
         // Tìm user và giỏ hàng
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+
         Cart cart = user.getCart();
         if (cart == null) {
             // Tạo giỏ hàng mới nếu chưa có
@@ -53,7 +52,6 @@ public class CartServiceImpl implements CartService {
             user.setCart(cart);
             userRepository.save(user);
         }
-
         return productMapper.toCartResponse(cart);
     }
 
@@ -117,6 +115,7 @@ public class CartServiceImpl implements CartService {
         // Tìm user và giỏ hàng
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+
         Cart cart = user.getCart();
         if (cart == null) {
             throw new AppException(ErrorCode.CART_NOT_FOUND);
@@ -153,6 +152,7 @@ public class CartServiceImpl implements CartService {
         // Tìm user và giỏ hàng
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+
         Cart cart = user.getCart();
         if (cart == null) {
             throw new AppException(ErrorCode.CART_NOT_FOUND);

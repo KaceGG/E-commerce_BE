@@ -1,15 +1,16 @@
 package com.E_commerceApp.DTOs.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class PaymentResponse {
     private int id;
     private String paymentMethod;
+    private Double amount; // Sử dụng Double để cho phép null
+    private String status;
+    private String orderToken;
+    private String paymentUrl;
+    private LocalDateTime paymentDate;
 }

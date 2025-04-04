@@ -1,20 +1,24 @@
 package com.E_commerceApp.controllers;
 
-import com.E_commerceApp.DTOs.request.OrderRequest;
-import com.E_commerceApp.repositories.OrderRepository;
+import com.E_commerceApp.DTOs.response.ApiResponse;
+import com.E_commerceApp.DTOs.response.OrderResponse;
+import com.E_commerceApp.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/order")
 public class OrderController {
-    @Autowired
-    OrderRepository orderRepository;
 
-    @PostMapping("/create")
-    public ResponseEntity<?> createOrder(@RequestBody OrderRequest orderRequest) throws Exception {
-        return null;
+    @Autowired
+    private OrderService orderService;
+
+    @GetMapping
+    public ApiResponse<List<OrderResponse>> getOrdersByUserId(
+            @RequestParam("userId") String userId) {
+        return orderService.getOrdersByUserId(userId);
     }
 }

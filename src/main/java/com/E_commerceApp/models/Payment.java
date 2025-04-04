@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -12,14 +14,14 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
+    private String orderToken;
+    private String paymentUrl;
+    private double amount;
+    private OrderStatus status;
+    private LocalDateTime paymentDate;
 
     @OneToOne
     @JoinColumn(name = "order_id")
     private Order order;
-
-    public void setZaloPayOrderUrl(String orderurl) {
-
-    }
 }

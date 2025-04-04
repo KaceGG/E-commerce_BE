@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OrderItemResponse {
     private int id;
-    private int quantity;
-    private float price;
     private int productId;
+    private String productName; // Lấy từ Product
+    private String productImageUrl; // Lấy từ Product
+    private double price;
+    private int quantity;
 }
