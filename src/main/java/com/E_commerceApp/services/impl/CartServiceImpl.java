@@ -185,7 +185,8 @@ public class CartServiceImpl implements CartService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         Cart cart = user.getCart();
         if (cart == null) {
-            return; // Không có giỏ hàng để xóa
+            log.info("No cart found for user ID: {}", userId);
+            return;
         }
 
         // Xóa tất cả cart items
