@@ -44,6 +44,7 @@ public class ZaloPayService {
         order.put("bank_code", "zalopayapp");
         order.put("item", new JSONArray(request.getItems()).toString());
         order.put("embed_data", new JSONObject(new HashMap<>()).toString());
+        order.put("callback_url", "https://b0dd-2402-800-6343-6b81-6972-8a1d-40fc-d4e3.ngrok-free.app/callback");
 
         String data = order.get("app_id") + "|" + order.get("app_trans_id") + "|" +
                 order.get("app_user") + "|" + order.get("amount") + "|" +

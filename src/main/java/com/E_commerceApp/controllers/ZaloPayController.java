@@ -98,25 +98,17 @@ public class ZaloPayController {
         Payment payment = new Payment();
         payment.setPaymentMethod(PaymentMethod.ZALOPAY);
         payment.setOrder(order);
-        payment.setOrderToken(zaloResponse.getZpTransToken());
+        payment.setOrderToken(zaloResponse.getAppTransId());
         payment.setPaymentUrl(zaloResponse.getOrderUrl());
         payment.setAmount(zaloResponse.getAmount());
         payment.setPaymentDate(LocalDateTime.now());
         payment.setStatus(zaloResponse
                 .getReturnCode() == 1 ? OrderStatus.SUCCESS : OrderStatus.PENDING);
 
-        // Cập nhật trạng thái Order dựa trên phản hồi ZaloPay
-        if (zaloResponse.getReturnCode() == 1) {
-            order.setStatus(OrderStatus.SUCCESS);
-
-            // Clear giỏ hàng khi thanh toán thành công
-            cartService.clearCart(request.getUserId());
-            System.out.println("Cart cleared for user ID: " + request.getUserId());
-        }
         order.setPayment(payment);
 
-        System.out.println("Zalo response amount: "  + zaloResponse.getAmount());
-        System.out.println("Order status: "  + order.getStatus());
+//        System.out.println("Zalo response amount: " + zaloResponse.getAmount());
+//        System.out.println("Order status: " + order.getStatus());
 
         // Lưu Payment và cập nhật Order
         paymentRepository.save(payment);
