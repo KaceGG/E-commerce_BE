@@ -1,6 +1,5 @@
 package com.E_commerceApp.controllers;
 
-import com.E_commerceApp.DTOs.request.RefundRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.DTOs.response.OrderResponse;
 import com.E_commerceApp.services.OrderService;
@@ -16,6 +15,11 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @GetMapping("/getAll")
+    public ApiResponse<List<OrderResponse>> getAllOrders() {
+        return orderService.getAllOrders();
+    }
 
     @GetMapping
     public ApiResponse<List<OrderResponse>> getOrdersByUserId(
