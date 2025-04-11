@@ -1,5 +1,6 @@
 package com.E_commerceApp.controllers;
 
+import com.E_commerceApp.DTOs.request.RefundRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.DTOs.response.OrderResponse;
 import com.E_commerceApp.services.OrderService;
@@ -21,4 +22,11 @@ public class OrderController {
             @RequestParam("userId") String userId) {
         return orderService.getOrdersByUserId(userId);
     }
+
+//    @PostMapping("/cancel")
+//    public ApiResponse<OrderResponse> cancelOrder(@RequestBody RefundRequest request) throws Exception {
+//        ApiResponse<OrderResponse> apiResponse = new ApiResponse<>();
+//        apiResponse.setResult(orderService.cancelOrder(request));
+//        return apiResponse;
+//    }
 }

@@ -16,6 +16,7 @@ public class Payment {
 
     private PaymentMethod paymentMethod;
     private String orderToken;
+    private String zpTransId;
     private String paymentUrl;
     private double amount;
     private OrderStatus status;

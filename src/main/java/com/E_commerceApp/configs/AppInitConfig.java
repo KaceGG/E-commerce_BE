@@ -1,11 +1,14 @@
 package com.E_commerceApp.configs;
 
 import com.E_commerceApp.constant.PredefinedCategory;
+import com.E_commerceApp.constant.PredefinedProduct;
 import com.E_commerceApp.constant.PredefinedRole;
 import com.E_commerceApp.models.Category;
+import com.E_commerceApp.models.Product;
 import com.E_commerceApp.models.Role;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.repositories.CategoryRepository;
+import com.E_commerceApp.repositories.ProductRepository;
 import com.E_commerceApp.repositories.RoleRepository;
 import com.E_commerceApp.repositories.UserRepository;
 import lombok.experimental.NonFinal;
@@ -17,6 +20,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Configuration
 public class AppInitConfig {
@@ -35,11 +40,9 @@ public class AppInitConfig {
     }
 
     @Bean
-//    @ConditionalOnProperty(
-//            prefix = "spring",
-//            value = "datasource.driver-class-name",
-//            havingValue = "com.mysql.cj.jdbc.Driver")
-    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, CategoryRepository categoryRepository) {
+    ApplicationRunner applicationRunner(
+            UserRepository userRepository, RoleRepository roleRepository,
+            CategoryRepository categoryRepository, ProductRepository productRepository) {
         log.info("Application started!");
         return args -> {
             if (userRepository.findByUsername("admin").isEmpty()) {
@@ -83,6 +86,23 @@ public class AppInitConfig {
                 categoryRepository.save(Category.builder()
                         .name(PredefinedCategory.TABLET_CATEGORY)
                         .description("Tablet")
+                        .build());
+            }
+
+            if (!productRepository.existsByName("Sony Xperia 1")) {
+                Set<Category> categorySet = new HashSet<>();
+                Optional<Category> mobilePhoneCat = categoryRepository.findByName("Điện thoại");
+                mobilePhoneCat.ifPresent(category -> {
+                    categorySet.add(mobilePhoneCat.get());
+                });
+
+                productRepository.save(Product.builder()
+                        .name(PredefinedProduct.PRODUCT1)
+                        .description("Điện thoại Sony Xperia 1")
+                        .price(150000)
+                        .quantity(100)
+                        .categories(categorySet)
+                        .imageUrl("https://res.cloudinary.com/dxxxhfhkp/image/upload/v1743324980/ecommerce/products/product_Sony_Xperia_1_1743324978655.webp")
                         .build());
             }
         };

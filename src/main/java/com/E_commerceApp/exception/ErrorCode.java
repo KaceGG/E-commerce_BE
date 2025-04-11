@@ -23,7 +23,9 @@ public enum ErrorCode {
     INSUFFICIENT_STOCK(1014, "Insufficient stock!", HttpStatus.BAD_REQUEST),
     LOGIN_FAILED(1015, "Username or password is incorrect", HttpStatus.BAD_REQUEST),
     ORDER_NOT_FOUND(1016, "Order not found", HttpStatus.NOT_FOUND),
-    PAYMENT_FAILED(1017, "Payment failed", HttpStatus.BAD_REQUEST);
+    PAYMENT_FAILED(1017, "Payment failed", HttpStatus.BAD_REQUEST),
+    INVALID_OLD_PASSWORD(1018, "Old password does not correct", HttpStatus.BAD_REQUEST),
+    PASSWORDS_DO_NOT_MATCH(1019, "Passwords do not match", HttpStatus.BAD_REQUEST);
 
     private final int code;
     private final String message;
