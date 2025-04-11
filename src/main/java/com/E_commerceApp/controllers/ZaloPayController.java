@@ -99,6 +99,7 @@ public class ZaloPayController {
         payment.setPaymentMethod(PaymentMethod.ZALOPAY);
         payment.setOrder(order);
         payment.setOrderToken(zaloResponse.getAppTransId());
+        payment.setZpTransId(zaloResponse.getZpTransToken());
         payment.setPaymentUrl(zaloResponse.getOrderUrl());
         payment.setAmount(zaloResponse.getAmount());
         payment.setPaymentDate(LocalDateTime.now());

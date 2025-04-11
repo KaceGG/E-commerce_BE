@@ -11,6 +11,7 @@ public class PaymentResponse {
     private Double amount; // Sử dụng Double để cho phép null
     private String status;
     private String orderToken;
+    private String zpTransId;
     private String paymentUrl;
     private LocalDateTime paymentDate;
 }

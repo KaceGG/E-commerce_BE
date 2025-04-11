@@ -19,4 +19,3 @@ public class UserUpdateRequest {
     private String phone;
     private String address;
 }
-

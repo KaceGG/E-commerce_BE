@@ -53,6 +53,7 @@ public interface OrderMapper {
     @Mapping(source = "orderToken", target = "orderToken")
     @Mapping(source = "paymentUrl", target = "paymentUrl")
     @Mapping(source = "paymentDate", target = "paymentDate")
+    @Mapping(source = "zpTransId", target = "zpTransId")
     PaymentResponse toPaymentResponse(Payment payment);
 
     @Named("mapPaymentMethodToString")

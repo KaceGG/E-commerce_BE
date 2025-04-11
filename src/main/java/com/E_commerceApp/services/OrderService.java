@@ -9,4 +9,9 @@ public interface OrderService {
 //    public OrderResponse createOrder(OrderRequest request);
 
     public ApiResponse<List<OrderResponse>> getOrdersByUserId(String userId);
+
+//    public OrderResponse cancelOrder(RefundRequest request) throws Exception;
+
+    public Void cancelOrder(int orderId, String userId);
 }
+

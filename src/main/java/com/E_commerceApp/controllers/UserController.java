@@ -1,5 +1,6 @@
 package com.E_commerceApp.controllers;
 
+import com.E_commerceApp.DTOs.request.ChangePasswordRequest;
 import com.E_commerceApp.DTOs.request.UserCreationRequest;
 import com.E_commerceApp.DTOs.request.UserUpdateRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
@@ -32,8 +33,11 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserResponse getUser(@PathVariable String userId) {
-        return userService.getUser(userId);
+    public ApiResponse<UserResponse> getUser(@PathVariable String userId) {
+        ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.getUser(userId));
+        apiResponse.setMessage("Fetch user information successfully!");
+        return apiResponse;
     }
 
     @PostMapping("/create")
@@ -55,6 +59,16 @@ public class UserController {
 //        return ApiResponse.<UserResponse>builder()
 //                .result(userService.updateUser(userId, request))
 //                .build();
+    }
+
+    @PostMapping("/{userId}/change-password")
+    public ApiResponse<Void> changePassword(
+            @PathVariable String userId,
+            @RequestBody ChangePasswordRequest request) {
+        userService.changePassword(userId, request);
+        ApiResponse<Void> apiResponse = new ApiResponse<>();
+        apiResponse.setMessage("Change password successfully");
+        return apiResponse;
     }
 
     //    @PreAuthorize("hasAnyRole('ADMIN')")
