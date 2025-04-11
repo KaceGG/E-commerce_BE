@@ -1,13 +1,11 @@
 package com.E_commerceApp.services.impl;
 
-import com.E_commerceApp.DTOs.request.RefundRequest;
 import com.E_commerceApp.DTOs.response.ApiResponse;
 import com.E_commerceApp.DTOs.response.OrderResponse;
 import com.E_commerceApp.exception.AppException;
 import com.E_commerceApp.exception.ErrorCode;
 import com.E_commerceApp.mappers.OrderMapper;
 import com.E_commerceApp.models.Order;
-import com.E_commerceApp.models.OrderStatus;
 import com.E_commerceApp.models.User;
 import com.E_commerceApp.repositories.OrderRepository;
 import com.E_commerceApp.repositories.UserRepository;
@@ -17,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -35,6 +32,24 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private ZaloPayService zaloPayService;
+
+    @Override
+    public ApiResponse<List<OrderResponse>> getAllOrders() {
+        ApiResponse<List<OrderResponse>> apiResponse = new ApiResponse<>();
+
+        List<Order> orders = orderRepository.findAll();
+        if (orders.isEmpty()) {
+            apiResponse.setMessage("No orders found");
+            apiResponse.setResult(null);
+        } else {
+            List<OrderResponse> orderResponses = orders.stream()
+                    .map(orderMapper::toOrderResponse)
+                    .collect(Collectors.toList());
+            apiResponse.setMessage("All orders retrieved successfully");
+            apiResponse.setResult(orderResponses);
+        }
+        return apiResponse;
+    }
 
     public ApiResponse<List<OrderResponse>> getOrdersByUserId(String userId) {
         ApiResponse<List<OrderResponse>> apiResponse = new ApiResponse<>();

@@ -23,7 +23,7 @@ import java.util.*;
 public class ZaloPayService {
 
     public static final String NGROK_URL =
-            "https://b0dd-2402-800-6343-6b81-6972-8a1d-40fc-d4e3.ngrok-free.app";
+            "https://488f-2402-800-6343-74f1-88bc-3245-9302-5530.ngrok-free.app";
 
     private static final Map<String, String> config = new HashMap<>() {{
         put("app_id", "2554");

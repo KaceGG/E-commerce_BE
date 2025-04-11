@@ -6,12 +6,10 @@ import com.E_commerceApp.DTOs.response.OrderResponse;
 import java.util.List;
 
 public interface OrderService {
-//    public OrderResponse createOrder(OrderRequest request);
+    ApiResponse<List<OrderResponse>> getAllOrders();
 
-    public ApiResponse<List<OrderResponse>> getOrdersByUserId(String userId);
+    ApiResponse<List<OrderResponse>> getOrdersByUserId(String userId);
 
-//    public OrderResponse cancelOrder(RefundRequest request) throws Exception;
-
-    public Void cancelOrder(int orderId, String userId);
+    Void cancelOrder(int orderId, String userId);
 }
 
